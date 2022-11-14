@@ -1,0 +1,97 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+		<style>
+			.box {
+				padding: 100px 0;
+				width: 400px;
+				text-align: center;
+				background: #ddd;
+				margin: 20px;
+				display: inline-block;
+			}
+			.fav {
+				background: yellow;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- <h1>hello</h1> -->
+
+		<div id="app">
+			<!--?basics and contidionals  -->
+			<!-- grab dynamic value (title) from data -->
+			<p>{{title}}</p>
+			<div v-if="showCounter">
+				<div>Counter: {{counter}}</div>
+			</div>
+			<div v-show="showCounter">Showing counter</div>
+			<button v-on:click="counter++">increase</button>
+			<button v-on:click="counter--">decrease</button>
+			<button v-on:click="counter=0">reset</button>
+			<button @click="counter=counter*-1">change sign</button>
+			<button v-on:click="changeTitle">Change title</button>
+			<button v-on:click="changeTitleArgument('title argument')">
+				Change title argument
+			</button>
+			<button v-on:click="handleShowBooks">
+				<div v-if="showCounter">Hide Counter</div>
+				<div v-if="!showCounter">Show Counter</div>
+				<!-- <div v-else="showCounter">Show Counter</div> -->
+			</button>
+			<br />
+			<br />
+
+			<!--? mouse events -->
+			<div class="box" v-on:mouseover="handleEvent($event, 5)">
+				mouseover (enter)
+			</div>
+			<div class="box" @mouseleave="handleEvent">mouseleave</div>
+			<div class="box" @dblclick="handleEvent">double click</div>
+			<div class="box" @mousemove="handleMouseMove">position - {{x}} {{y}}</div>
+
+			<br />
+			<br />
+			<!--? lists -->
+			<div>
+				<ul>
+					<li
+						v-for="book in books"
+						:class="{fav: book.isFav}"
+						@click="handleToggleFav(book)"
+					>
+						<h3>{{book.title}}</h3>
+						<p>{{book.author}}</p>
+					</li>
+				</ul>
+			</div>
+			<hr />
+			<div>
+				<ul>
+					<li
+						v-for="book in filteredBooks"
+						:class="{fav: book.isFav}"
+						@click="handleToggleFav(book)"
+					>
+						<h3>{{book.title}}</h3>
+						<p>{{book.author}}</p>
+					</li>
+				</ul>
+			</div>
+
+			<br />
+			<!--? attribute binding  -->
+			<a v-bind:href="url">Google Link</a>
+			<a :href="url">Google Link</a>
+		</div>
+
+		<!-- here vue won't work -->
+		<!-- {{title}} -->
+		<!-- <div>test</div> -->
+		<script src="app.js"></script>
+	</body>
+</html>
