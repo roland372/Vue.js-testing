@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref, computed } from 'vue'
+import { reactive, ref, computed, watch } from 'vue'
 
 // <----- basics ----->
 // ref - used for primitive values
@@ -40,7 +40,7 @@ function toggleShow() {
 let id = 0
 const newTodo = ref('')
 const hideCompleted = ref(false)
-const todos = ref([
+const todos = reactive([
   { id: id++, text: 'Learn HTML', done: true },
   { id: id++, text: 'Learn JavaScript', done: true },
   { id: id++, text: 'Learn Vue', done: false }
@@ -61,7 +61,22 @@ function removeTodo(id) {
   todos.value = todos.value.filter((todo) => id !== todo.id)
 }
 
-console.log(todos.value)
+// <----- Watchers ----->
+const todoId = ref(1)
+const todoData = ref(null)
+
+async function fetchData() {
+  todoData.value = null
+  const res = await fetch(
+    `https://jsonplaceholder.typicode.com/todos/${todoId.value}`
+  )
+  todoData.value = await res.json()
+  console.log(todoData.value);
+}
+
+fetchData()
+
+watch(todoId, fetchData)
 
 </script>
 
@@ -112,6 +127,18 @@ console.log(todos.value)
   <button @click="hideCompleted = !hideCompleted">
     {{ hideCompleted ? 'Show all' : 'Hide completed' }}
   </button>
+  <hr>
+
+  <!--? watchers  -->
+  <h1>Watchers</h1>
+  <div>
+    <p>Todo id: {{ todoId }}</p>
+    <button @click="todoId = 1">Fetch first todo</button>
+    <button @click="todoId--">Fetch previous todo</button>
+    <button @click="todoId++">Fetch next todo</button>
+    <p v-if="!todoData">Loading...</p>
+    <pre v-else>{{ todoData }}</pre>
+  </div>
   <hr>
 </template>
 
