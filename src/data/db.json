@@ -1,13 +1,19 @@
 {
   "jobs": [
     {
-      "title": "title 1", "id": 1, "details": "details 1"
+      "details": "details 1",
+      "id": 1,
+      "title": "title 1"
     },
     {
-      "title": "title 2", "id": 2, "details": "details 2"
+      "details": "details 2 ",
+      "id": 2,
+      "title": "title 2"
     },
     {
-      "title": "title 3", "id": 3, "details": "details 3"
+      "details": "details 3",
+      "id": 3,
+      "title": "title 3"
     }
   ]
 }

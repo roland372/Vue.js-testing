@@ -8,7 +8,6 @@ import JobDetails from '../views/jobs/JobDetails.vue';
 import SingleJob from '../views/jobs/SingleJob.vue';
 
 const router = createRouter({
-	// history: createWebHistory(import.meta.env.BASE_URL),
 	history: createWebHistory(process.env.BASE_URL),
 	routes: [
 		{
@@ -31,12 +30,6 @@ const router = createRouter({
 			name: 'jobs',
 			component: Jobs,
 		},
-		// {
-		// 	path: '/jobs/:id',
-		// 	name: 'jobDetails',
-		// 	component: JobDetails,
-		// 	props: true,
-		// },
 		{
 			path: '/jobs/:id',
 			name: 'singleJob',

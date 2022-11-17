@@ -3,12 +3,7 @@ import { ref } from 'vue'
 
 const props = defineProps({
   id: String,
-  // title: String
 })
-
-
-// const props = defineProps(['details', 'id', 'title'])
-// console.log(props);
 
 const jobs = ref({});
 
